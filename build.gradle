@@ -1,0 +1,44 @@
+apply plugin: 'java'
+
+version = '1.0'
+
+sourceSets.main.java.srcDirs = ["src/"]
+allprojects{
+    repositories{
+        mavenLocal()
+        mavenCentral()
+        maven{ url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven{ url "https://oss.sonatype.org/content/repositories/releases/" }
+        maven{ url 'https://jitpack.io' }
+        maven{
+            name 'm2-dv8tion'
+            url 'https://m2.dv8tion.net/releases'
+        }
+    }
+}
+
+ext{
+    mindustryVersion = 'v135'
+}
+
+task dist(type: Jar){
+    from files(sourceSets.main.output.classesDirs)
+    from files(sourceSets.main.output.resourcesDir)
+    from {configurations.runtimeClasspath.collect{ it.isDirectory() || !it.name.endsWithAny(".zip", ".jar") ? it : zipTree(it) }}
+
+    archiveFileName = "bXNjaToScheme.jar"
+
+    manifest{
+        attributes 'Main-Class': "acemany.bXNjaToScheme"
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+dependencies{
+    implementation("net.dv8tion:JDA:5.0.0-alpha.10")
+    implementation "org.jsoup:jsoup:1.7.2"
+    compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+    compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+    implementation "org.slf4j:slf4j-nop:1.7.31"
+}

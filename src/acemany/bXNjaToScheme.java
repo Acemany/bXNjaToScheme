@@ -26,12 +26,12 @@ public class bXNjaToScheme{
                                "config: \"\"\"" + config + "\"\"\"\n------------------");
         }
 
-        System.out.println("Название: \"" + scheme.name() + "\"\n" +
-                           "Описание: \"\n" + scheme.description() + "\"\n" +
-                           "Теги: " + scheme.labels + "\n" +
-                           "Версия: " + scheme.tags.get("version") + "\n" +
-                           "Размер: " + scheme.width + "x" + scheme.height + "\n\n" +
+        System.out.println("Title: \"" + scheme.name() + "\"\n" +
+                           "Description: \"\n" + scheme.description() + "\"\n" +
+                           "Tags: " + scheme.labels + "\n" +
+                           "Version: " + scheme.tags.get("version") + "\n" +
+                           "Size: " + scheme.width + "x" + scheme.height + "\n\n" +
                            ContentHandler.requirementsToString(scheme.requirements()) + "\n" +
-                           "Энергия: +" + scheme.powerProduction()*60 + " -" + scheme.powerConsumption()*60);
+                           "Energy: +" + scheme.powerProduction()*60 + " -" + scheme.powerConsumption()*60);
     }
 }
